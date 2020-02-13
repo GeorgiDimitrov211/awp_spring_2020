@@ -4,6 +4,7 @@ import InputTextExample from "./InputTextExample";
 import HelloExample from "./HelloExample";
 import NameListExample from "./NameListExample";
 import IsItFriday from "./IsItFriday";
+import ListSum from "./ListSum";
 
 class App extends Component {
 
@@ -21,6 +22,8 @@ class App extends Component {
                 <InputTextExample/>
 
                 <NameListExample names={['Kristian', 'Jes', 'Mads', 'Torill']}/>
+
+                <ListSum numbers={[1,2,3,4]}></ListSum>
             </>
         );
     }

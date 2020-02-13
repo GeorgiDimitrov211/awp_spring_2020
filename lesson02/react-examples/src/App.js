@@ -5,12 +5,15 @@ import HelloExample from "./HelloExample";
 import NameListExample from "./NameListExample";
 import IsItFriday from "./IsItFriday";
 import ListSum from "./ListSum";
+import AddNumber from "./AddNumber";
 
 class App extends Component {
 
     render() {
         return (
             <>
+                <AddNumber/>
+
                 <IsItFriday></IsItFriday>
 
                 <HelloExample just_a_name="fellow programmer"/> {/* just_a_name is a prop */}
@@ -24,6 +27,8 @@ class App extends Component {
                 <NameListExample names={['Kristian', 'Jes', 'Mads', 'Torill']}/>
 
                 <ListSum numbers={[1,2,3,4]}></ListSum>
+
+
             </>
         );
     }

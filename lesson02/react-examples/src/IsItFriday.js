@@ -20,7 +20,7 @@ class IsItFriday extends Component {
             </>
          */
         return (
-            <div style={{backgroundColor: 'red', color: 'blue'}}>
+            <div>
                 {content}
             </div>
         );

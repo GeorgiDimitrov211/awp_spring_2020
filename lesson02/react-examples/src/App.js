@@ -3,21 +3,24 @@ import ButtonExample from "./ButtonExample";
 import InputTextExample from "./InputTextExample";
 import HelloExample from "./HelloExample";
 import NameListExample from "./NameListExample";
+import IsItFriday from "./IsItFriday";
 
 class App extends Component {
 
     render() {
         return (
             <>
-              <HelloExample just_a_name="fellow programmer"/> {/* just_a_name is a prop */}
+                <IsItFriday></IsItFriday>
 
-              <ButtonExample/>
+                <HelloExample just_a_name="fellow programmer"/> {/* just_a_name is a prop */}
 
-              <br/><br/>
+                <ButtonExample/>
 
-              <InputTextExample/>
+                <br/><br/>
 
-              <NameListExample names={['Kristian', 'Jes', 'Mads', 'Torill']}/>
+                <InputTextExample/>
+
+                <NameListExample names={['Kristian', 'Jes', 'Mads', 'Torill']}/>
             </>
         );
     }

@@ -13,6 +13,12 @@ class IsItFriday extends Component {
         if (this.state.friday) {
             content = <p>It is friday</p>;
         }
+        /*
+            Alternative:
+            <>
+                {this.state.today ? <p>It is friday.</p> : <p>It is not friday.</p>}
+            </>
+         */
         return (
             <>
                 {content}

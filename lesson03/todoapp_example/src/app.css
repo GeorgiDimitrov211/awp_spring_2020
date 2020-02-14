@@ -1,0 +1,9 @@
+.contents {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.element {
+    width: auto;
+}

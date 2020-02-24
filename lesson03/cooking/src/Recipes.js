@@ -3,12 +3,19 @@ import { Link } from "@reach/router";
 
 class Recipes extends Component {
     render() {
+        const filter = this.props.filter;
+
         const mapFunction = elm =>
-        <li>
+        <li key={elm.id}>
             <Link to={"/recipe/"+elm.id}>{elm.title}</Link>
         </li>;
 
-        const list = this.props.data.map(mapFunction);
+        let recipes = this.props.data;
+        if (filter) {
+            recipes = recipes.filter(recipe => recipe.ingredients.includes(filter));
+        }
+        let list = recipes.map(mapFunction);
+
         return (
             <>
                 <h3>List</h3>

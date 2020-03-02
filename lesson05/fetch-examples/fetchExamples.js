@@ -17,11 +17,15 @@ async function GetDataUsingAwait() {
 }
 
 async function PostDataUsingAwait() {
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+    const response = await fetch('https://krdo-todo-api.herokuapp.com/api/tasks', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
         method: 'POST',
-        body: {
-            "text": "This is some text"
-        }
+        body: JSON.stringify({
+            "text": "Write this example",
+            "done": "false"
+        })
     });
     const data = await response.json();
     console.log("Printing the response:", data);
@@ -29,6 +33,6 @@ async function PostDataUsingAwait() {
 
 
 // Run the examples!
-GetData();
-GetDataUsingAwait().then(_ => console.log("Done GET!"));
+//GetData();
+//GetDataUsingAwait().then(_ => console.log("Done GET!"));
 PostDataUsingAwait().then(_ => console.log("Done POST!"));

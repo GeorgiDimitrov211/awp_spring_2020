@@ -3,7 +3,7 @@
 const fetch = require('node-fetch');
 
 function GetData() {
-    fetch('https://jsonplaceholder.typicode.com/todos/1')
+    fetch('https://krdo-todo-api.herokuapp.com/api/tasks')
     .then(response => response.json()) // Turn JSON into an object
     .then(data => {
         console.log("Printing the tasks:", data);
@@ -11,7 +11,7 @@ function GetData() {
 }
 
 async function GetDataUsingAwait() {
-    const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+    const response = await fetch('https://krdo-todo-api.herokuapp.com/api/tasks');
     const data = await response.json();
     console.log("Printing the tasks:", data);
 }
@@ -23,8 +23,8 @@ async function PostDataUsingAwait() {
         },
         method: 'POST',
         body: JSON.stringify({
-            "text": "Write this example",
-            "done": "false"
+            text: "Write this example",
+            done: false
         })
     });
     const data = await response.json();
@@ -33,6 +33,6 @@ async function PostDataUsingAwait() {
 
 
 // Run the examples!
-//GetData();
-//GetDataUsingAwait().then(_ => console.log("Done GET!"));
+GetData();
+GetDataUsingAwait().then(_ => console.log("Done GET!"));
 PostDataUsingAwait().then(_ => console.log("Done POST!"));

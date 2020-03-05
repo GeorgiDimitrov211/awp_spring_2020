@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import { Router } from "@reach/router";
+import { Router, Link } from "@reach/router";
 import Recipes from './Recipes';
 import Recipe from './Recipe';
+import NotFound from './NotFound';
+import NewRecipe from './NewRecipe';
 
 class App extends Component {
     constructor(props) {
@@ -10,15 +12,27 @@ class App extends Component {
         this.state = {
             recipes: [
                 {id: 0, title: "Pizza 1", desc: "This is pizza 1",
-                    ingredients: ["tomato", "garlic"]},
+                    ingredients: ["cheese", "tomato"]},
                 {id: 1, title: "Pizza 2", desc: "This is pizza 2",
-                    ingredients: ["tomato", "onion"]},
+                    ingredients: ["cheese", "tomato"]},
                 {id: 2, title: "Pizza 3", desc: "This is pizza 3",
-                    ingredients: ["tomato", "cheese"]},
+                    ingredients: ["cheese", "garlic"]},
                 {id: 3, title: "Pizza 4", desc: "This is pizza 4",
-                    ingredients: ["tomato", "cheese"]}
+                    ingredients: ["cheese", "onion"]}
             ]
         }
+    }
+
+    submit(title, desc) {
+        const newRecipe = {
+            id: Math.random(),
+            title: title,
+            desc: desc,
+            ingredients: []
+        };
+        this.setState({
+            recipes: [...this.state.recipes, newRecipe]
+        })
     }
 
     getRecipe(id) {
@@ -35,7 +49,10 @@ class App extends Component {
                     <Recipes path="/with/:filter" data={this.state.recipes}></Recipes>
                     <Recipe path="/recipe/:id"
                             getRecipe={(id) => this.getRecipe(id)}></Recipe>
+                    <NewRecipe path="/new" submit={(title, desc) => this.submit(title, desc)}></NewRecipe>
+                    <NotFound default></NotFound>
                 </Router>
+
             </>
         );
     }

@@ -22,6 +22,7 @@ class Recipes extends Component {
                 <ul>
                     {list}
                 </ul>
+                <Link to="/new">New recipe</Link>
             </>
         );
     }

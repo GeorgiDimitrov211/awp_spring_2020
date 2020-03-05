@@ -6,8 +6,8 @@ class Recipe extends Component {
         const id = this.props.id;
         const recipe = this.props.getRecipe(id);
 
-        const mapFunction = ingredient =>
-            <li>
+        const mapFunction = (ingredient, index) =>
+            <li key={index}>
                 <Link to={`/with/${ingredient}`}>{ingredient}</Link>
             </li>;
         let ingredients = recipe.ingredients.map(mapFunction);

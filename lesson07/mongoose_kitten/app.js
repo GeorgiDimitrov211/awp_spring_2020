@@ -1,22 +1,23 @@
 const mongoose = require('mongoose'); // We need the mongoose library
-// Connection to local database named 'kittens-example'. If it doesn't exists, it will automatically get created.
-mongoose.connect('mongodb://localhost/kittens-example', {useNewUrlParser: true, useUnifiedTopology: true})
-    .then(async _ => { // When the Promise resolves, we do some stuff.
-        console.log("Database connected:", mongoose.connection.name);
-        await doStuff();
-    })
-    .catch(e => { // If any errors happens during connection, we print them here.
-        console.error(e)
-    });
+
+doStuff();
 
 async function doStuff() {
+    // Connection to local database named 'kittens-example'. If it doesn't exists, it will automatically get created.
+    try {
+        await mongoose.connect('mongodb://localhost/kittens-example', {useNewUrlParser: true, useUnifiedTopology: true});
+    } catch (e) {
+        console.error(e)
+    }
+    console.log("Database connected:", mongoose.connection.name);
+
     // This is the schema for kitten
     const kittySchema = new mongoose.Schema({
         name: String, // A kitten only has a name (String).
     });
 
     // The 'Kitten' model is used to do CRUD stuff with kittens
-    let Kitten = mongoose.model('Kitten', kittySchema);
+    const Kitten = mongoose.model('Kitten', kittySchema);
 
     // Use the model to create a single kitten (named "Garfield")
     let garfield = new Kitten({ name: 'Garfield' });

@@ -1,11 +1,10 @@
 const mongoose = require('mongoose'); // We need the mongoose library
 
-doStuff();
-
-async function doStuff() {
+(async _ => {
     // Connection to local database named 'kittens-example'. If it doesn't exists, it will automatically get created.
     try {
-        await mongoose.connect('mongodb://localhost/kittens-example', {useNewUrlParser: true, useUnifiedTopology: true});
+        const url = 'mongodb://localhost/kittens-example';
+        await mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
     } catch (e) {
         console.error(e)
     }
@@ -37,4 +36,4 @@ async function doStuff() {
 
     await mongoose.disconnect(); // It's good practice to disconnect before closing the app.
     console.log("Databased disconnected");
-}
+})();

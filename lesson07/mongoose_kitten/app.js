@@ -3,36 +3,59 @@ const mongoose = require('mongoose'); // We need the mongoose library
 (async _ => {
     // Connection to local database named 'kittens-example'. If it doesn't exists, it will automatically get created.
     try {
-        const url = 'mongodb://localhost/kittens-example';
+        const url = 'mongodb://localhost/questions';
         await mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
     } catch (e) {
         console.error(e)
     }
     console.log("Database connected:", mongoose.connection.name);
 
-    // This is the schema for kitten
-    const kittySchema = new mongoose.Schema({
-        name: String, // A kitten only has a name (String).
+    const questionSchema = new mongoose.Schema({
+        text: String,
+        answers: [{
+            text: String,
+            votes: Number
+        }]
     });
 
-    // The 'Kitten' model is used to do CRUD stuff with kittens
-    const Kitten = mongoose.model('Kitten', kittySchema);
+    const Question = mongoose.model('Question', questionSchema);
 
-    // Use the model to create a single kitten (named "Garfield")
-    let garfield = new Kitten({ name: 'Garfield' });
+    const q1 = new Question({
+        text: "Hvordan laver man et spørgsmål?",
+        answers: [
+            {text: "Det ved jeg ikke", votes: 0},
+            {text: "Med Mongoose", votes: 0},
+            {text: "Med Compass", votes: 0}]
+    });
+    const q2 = new Question({
+        text: "Hvordan laver man et spørgsmål?",
+        answers: [
+            {text: "Det ved jeg ikke", votes: 0},
+            {text: "Med Mongoose", votes: 0},
+            {text: "Med Compass", votes: 0}]
+    });
 
     // Let's save it.
     try {
-        let savedKitten = await garfield.save();
-        console.log("Saved garfield.", savedKitten); // It is now saved!
+        //let savedQ1 = await q1.save();
+        //let savedQ2 = await q2.save();
+        //console.log("Questions saved.", savedQ1, savedQ2);
     } catch(error) { // Error handling in case it doesn't save
         console.error(error);
     }
 
-    // Find first kitten with name 'garfield'
-    // You can do try/catch here as well to catch errors.
-    let kitten = await Kitten.findOne({name: /garfield/i});
-    console.log("Found a kitten:", kitten); // Print it!
+    let question = await Question.findById("5e7c7141d805a11088a77458");
+    console.log("Found a question:", question);
+
+    const index = Math.floor(Math.random() * question.answers.length);
+    question.answers[index].votes++;
+
+    try {
+        let qSaved = await question.save();
+        console.log("Question updated.", qSaved);
+    } catch(error) {
+        console.error(error);
+    }
 
     await mongoose.disconnect(); // It's good practice to disconnect before closing the app.
     console.log("Databased disconnected");

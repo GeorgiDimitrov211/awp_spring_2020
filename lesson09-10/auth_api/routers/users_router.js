@@ -14,12 +14,16 @@ const users = [
 
 // Creating more test data: We run through all users and add a hash of their password to each.
 // In practice, you should hash when passwords are created, not later.
-users.forEach(user => {
-    bcrypt.hash(user.password, 10, function(err, hash) {
-        user.hash = hash; // The hash has been made, and is stored on the user object.
-        delete user.password; // Let's remove the clear text password (it shouldn't be there in the first place)
-        console.log(`Hash generated for ${user.username}:`, user); // Logging for debugging purposes
+users.forEach(async user => {
+    const hashedPassword = await new Promise((resolve, reject) => {
+        bcrypt.hash(user.password, 10, function(err, hash) {
+            if (err) reject(err); else resolve(hash);
+        });
     });
+
+    user.hash = hashedPassword; // The hash has been made, and is stored on the user object.
+    delete user.password; // Let's remove the clear text password (it shouldn't be there in the first place)
+    console.log(`Hash generated for ${user.username}:`, user); // Logging for debugging purposes
 });
 
 // Create the routes and export the router
